@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jaxws="http://cxf.apache.org/jaxws" xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+		http://cxf.apache.org/jaxws 
+		http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- 引入CXF Bean定义如下,早期的版本中使用3.0以后不再使用 -->
+	<!-- <import resource="classpath:META-INF/cxf/cxf.xml" /> -->
+	<!-- <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
+	<!-- <import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->
+	
+	
+	<bean id="logFeatures" class="org.apache.cxf.feature.LoggingFeature"></bean>
+	<jaxws:client id="productClient" serviceClass="cn.itcast.cxf.ProductService" address="http://localhost:8080/CXFSpringServer/services/productServiceI">
+		<jaxws:features>
+			<ref bean="logFeatures" />
+		</jaxws:features>
+	</jaxws:client>
+
+	<jaxws:client id="userClient" serviceClass="cn.itcast.cxf.user.UserServiceI" address="http://localhost:8080/Gary_ssh_maven/services/userCXFService">
+		<jaxws:features>
+			<ref bean="logFeatures" />
+		</jaxws:features>
+	</jaxws:client>
+</beans>  
